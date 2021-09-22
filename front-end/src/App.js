@@ -7,7 +7,7 @@ import Login from './Components/Login/Login';
 import Profile from './Components/Profile/profile';
 import Reviews from './Components/Reviews/Reviews';
 import Header from './Components/Header/Header';
-import Register from './Components/Register/register';
+import Register from './Components/Register/register_form';
 
 const mainUser ={
   name: {
@@ -22,51 +22,71 @@ const mainUser ={
   },
   //could also have location and other things in here
 
-
-
 }
 
-const initialBlank ={
-  name: {
-    first: '', //string
-    last: '', //string
-    pronoun: '', //dropdown
-  },
-  email: '', //string
-  login: {
-    username: '', //string
-    password: '' //string
-  },
-  //could also have location and other things in here
+//////// FOR REGISTER FORM ///////
+// const initialRegister ={
+//   name: {
+//     first: '', //string
+//     last: '', //string
+//     pronoun: '', //dropdown
+//   },
+//   email: '', //string
+//   login: {
+//     username: '', //string
+//     password: '' //string
+//   },
+//   //could also have location and other things in here
 
-}
+// }
+
+
+////// FOR LOGIN ////////
+// const initialLoginUsername ={
+//   login: {
+//     username: '', //string
+//     password: '' //string
+//   },
+  //could also have email as an optional and other things in here
+
+
 
 
 function App() {
   const [user, setUser] = useState(mainUser);
   const [users, setUsers] = useState([]); //to be an empty array of things
   
-  const [newMember, setNewMember] = useState(mainUser);
+  // const [newMember, setNewMember] = useState(mainUser);
 
-  const makeNewMember = (inputName, inputValue) => {
-    setNewMember({ ...newMember, [inputName]: inputValue});
+  // const makeNewMember = (inputName, inputValue) => {
+  //   setNewMember({ ...newMember, [inputName]: inputValue});
+  // }
+
+  // const createMember = (inputName, inputValue) => {
+  //   setUser({ ...user, [inputName]: inputValue});
+  // }
+
+  //for the submitter in the register
+  const onSubmit = (evt, register) =>{
+    evt.preventDefault();
+    console.log(register)
   }
-
-  const createMember = (inputName, inputValue) => {
-    setUser({ ...user, [inputName]: inputValue});
-  }
-
   
   useEffect(() => {
     async function getUsers() {
-    const users = await axios.get('https://randomuser.me/api/?results=5');
-    //console.log(users.data.results);
-    setUsers(users.data.results)
+      const users = await axios.get('https://randomuser.me/api/?results=5');
+      //console.log(users.data.results);
+      setUsers(users.data.results)
     }
     
     getUsers();
   }, []);
  
+  // useEffect(() => {
+  //   async function newMembership(){
+  //     const user = await axios.post('https://randomuser.me/api', )
+  //   }
+  // })
 
 
   return (
@@ -83,12 +103,13 @@ function App() {
     </div>
 
       <Route path="/login">
-        <Login user={user} key={user.login.password}/>
+        <Login user={user} key={user.login.password}
+        />
       </Route>
       <Route path="/register">
         <Register 
           user={user} 
-          update={createMember}
+          onSubmit = {onSubmit}
           />
       </Route>
       <Route exact path="/">
