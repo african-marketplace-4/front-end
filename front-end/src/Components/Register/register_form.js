@@ -1,7 +1,9 @@
 import React from "react";
 
 function Form(props){
-    
+  
+
+
     return(
         <form className="register">
           <div className="register-comp"> 
