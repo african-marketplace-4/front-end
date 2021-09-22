@@ -1,7 +1,7 @@
 import React from "react";
 
 function Form(props){
-  
+  console.log(props.user)
 
 
     return(
@@ -12,7 +12,7 @@ function Form(props){
                  type="text"
                  name="user.name.first"
                  placeholder="First Name"
-                 value={props.user.name.first}
+                 value={props.users.name.first}
                 />
             </label>
             <label className="name"> Last Name: 

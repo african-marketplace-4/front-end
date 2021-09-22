@@ -13,8 +13,8 @@ function Register(props) {
         <>
         <h1> register here </h1>
             <RegistForm 
-                values={values}
-                submit={makeNewUser}
+                // values={values}
+                // submit={makeNewUser}
 
                 /> 
         </>
