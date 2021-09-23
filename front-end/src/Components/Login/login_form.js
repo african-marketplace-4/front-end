@@ -8,12 +8,16 @@ const initialLoginUsername = {
   }
 }
 
-function Form(props) {
+function Form({user}) {
   const [ formVals, setFormVals ] = useState(initialLoginUsername);
 
-  const onChange = evt => {
+  const onChange = (evt) => {
     const { name, value } = evt.target;
-    setFormVals({ ...formVals, [name]: value})
+    // console.log({ ...formVals, 
+    //   login: { ...formVals.login, 
+    //   [name]: value}})
+    setFormVals({ ...formVals, 
+      login:{...formVals.login, [name]: value}})
   }
     
     // update the items in our api
@@ -25,7 +29,7 @@ function Form(props) {
 
     
     return(
-        <form className="login">
+        <form className="login" >
           <div className="login-comp"> 
             <label className="username"> Username: 
                <input
@@ -33,21 +37,21 @@ function Form(props) {
                  type="text"
                  name="username"
                  placeholder="this name will be shared with your peers"
-                 value={formVals.username}
+                 value={formVals.login.username}
                 />
             </label>
             <label> Password: 
                <input
                  onChange={onChange}
-                 type="text"
+                 type="password"
                  name="password"
                  placeholder="this will remain confidential"
-                 value={formVals.password}
+                 value={formVals.login.password}
                 />
             </label>
 
           </div>
-          <button to='/welcome_page' onClick={() => props.submitForm(<Link to="/welcome_page"/>)}> Submit </button>
+          <button to='/welcome_page' onClick={() => user.submitForm(<Link to="/welcome_page"/>)}> Submit </button>
         </form>
     )
 }

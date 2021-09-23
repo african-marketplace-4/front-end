@@ -7,7 +7,8 @@ import Login from './Components/Login/Login';
 import Profile from './Components/Profile/profile';
 import Reviews from './Components/Reviews/Reviews';
 import Header from './Components/Header/Header';
-import Register from './Components/Register/register_form';
+import RegiForm from './Components/Register/register_form';
+import Welcome from './Components/Welcome/Welcome';
 
 const mainUser ={
   name: {
@@ -21,7 +22,6 @@ const mainUser ={
     password: '1234hgft' //string
   },
   //could also have location and other things in here
-
 }
 
 //////// FOR REGISTER FORM ///////
@@ -56,20 +56,13 @@ function App() {
   const [user, setUser] = useState(mainUser);
   const [users, setUsers] = useState([]); //to be an empty array of things
   
-  // const [newMember, setNewMember] = useState(mainUser);
 
-  // const makeNewMember = (inputName, inputValue) => {
-  //   setNewMember({ ...newMember, [inputName]: inputValue});
-  // }
-
-  // const createMember = (inputName, inputValue) => {
-  //   setUser({ ...user, [inputName]: inputValue});
-  // }
 
   //for the submitter in the register
-  const onSubmit = (evt, register) =>{
+  const onSubmit = (evt, registration) => {
     evt.preventDefault();
-    console.log(register)
+    // console.log(registration)
+    setUser(registration)
   }
   
   useEffect(() => {
@@ -84,7 +77,7 @@ function App() {
  
   // useEffect(() => {
   //   async function newMembership(){
-  //     const user = await axios.post('https://randomuser.me/api', )
+  //     const user = await axios.post('https://randomuser.me/api', newMember)
   //   }
   // })
 
@@ -95,21 +88,18 @@ function App() {
         <Header />
       </div>
 
-    
-
     <div className="App">
       <h1> Hello world </h1>
       <p> this is a new line </p>
     </div>
 
       <Route path="/login">
-        <Login user={user} key={user.login.password}
+        <Login user={user}
         />
       </Route>
       <Route path="/register">
-        <Register 
-          user={user} 
-          onSubmit = {onSubmit}
+        <RegiForm 
+          user={user}
           />
       </Route>
       <Route exact path="/">
@@ -120,6 +110,9 @@ function App() {
       </Route>
       <Route path="/reviews">
         <Reviews users={users} />
+      </Route>
+      <Route path="/welcome">
+        <Welcome user={user} />
       </Route>
     
     </div>
