@@ -25,12 +25,12 @@ function Login() {
         </div>
         
         <div className="form-container">
-          <LoginForm 
+          <LoginForm user={initialData}
               values={matchSearch}/> {/* i dont think i know how to do this */}
         </div>
         <div className="subtext">
           <p> If you do not have a login, create one here: </p>
-          <p> <Link to="/register">Register here </Link> </p>
+          <p> <Link to="/register"> Register here </Link> </p>
         </div>
         
       </div>

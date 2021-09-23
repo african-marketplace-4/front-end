@@ -4,7 +4,7 @@ const initialRegister ={
   name: {
     first: '', //string
     last: '', //string
-    pronoun: '', //dropdown
+    pronoun: '', //bool
   },
   email: '', //string
   login: {
@@ -12,21 +12,32 @@ const initialRegister ={
     password: '' //string
   },
   //could also have location and other things in here
-
 }
 
-
 function RegiForm(props){
-  const [ formVals, setFormVals ] = useState(initialRegister);
+    const [ formVals, setFormVals ] = useState(initialRegister);
+  
+    const onChange = (evt) => {
+      const { name, value } = evt.target;
+      // console.log({ ...formVals, 
+      //   login: { ...formVals.login, 
+      //   [name]: value}})
+      setFormVals({
+           ...formVals, 
+           login:{...formVals.login, [name]: value},
+           /* email:{[name]: value} */[name]: value,
+           name:{...formVals.name, [name]: value}}
+      )
+    }
 
-  const onChange = evt => {
-    const { name, value } = evt.target;
-    setFormVals({ ...formVals, [name]: value })
-  }
-    
+    const onSubmit = (evt) =>{
+      evt.preventDefault()
+      console.log(onSubmit)
+    }
+
     return(
         <form className="register" 
-            onSubmit = { (evt)  =>
+            onSubmit = {(evt)  =>
               props.onSubmit(evt, formVals)
             }
             >
@@ -45,7 +56,7 @@ function RegiForm(props){
                  type="text"
                  name="first"
                  placeholder="First Name"
-                 value={formVals.first}
+                 value={formVals.name.first}
                  onChange={onChange}
                 />
             </label>
@@ -54,14 +65,14 @@ function RegiForm(props){
                  type="text"
                  name="last"
                  placeholder="this name will be shared with your peers"
-                 value={formVals.last}
+                 value={formVals.name.last}
                  onChange={onChange}
                 />
             </label>
             <label className="pronouns"> Preferred Pronouns: 
                <select
                  name="pronoun"
-                 value={formVals.pronoun}
+                 value={formVals.name.pronoun}
                  onChange={onChange}
                 >
                   <option value=''> -- select preferred pronoun </option>
@@ -76,7 +87,7 @@ function RegiForm(props){
                  type="text"
                  name="username"
                  placeholder="this name will be shared with your peers"
-                 value={formVals.username}
+                 value={formVals.login.username}
                  onChange={onChange}
                 />
             </label>
@@ -85,11 +96,11 @@ function RegiForm(props){
                  type="text"
                  name="password"
                  placeholder="this will remain confidential"
-                 value={formVals.password}
+                 value={formVals.login.password}
                  onChange={onChange}
                 />
             </label>
-            <input type='submit' value='Submit it!'/>
+            <input type='submit' value='sign up!'/>
           </div>
         </form>
     )
